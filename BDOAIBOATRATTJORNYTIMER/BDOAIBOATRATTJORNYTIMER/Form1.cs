@@ -19,6 +19,9 @@ namespace BDOAIBOATRATTJORNYTIMER
         public float fixer;
         public float RealTime;
         public bool Showna = false;
+        public float FormatHour;
+        public float FormatSeconds;
+        public float HourMod;
         public Form1()
         
         {
@@ -66,11 +69,31 @@ namespace BDOAIBOATRATTJORNYTIMER
                 timeRealVal = float.Parse(Convert.ToString(Convert.ToDouble(timeRealVal) - 0.01));
                 
                 floatTimeSetVal = float.Parse(TimeValue.Text);
-                
-                lblRealTime.Text = Convert.ToString(timeRealVal);
 
 
-                lblPercent.Text = Convert.ToString((((timeRealVal - floatTimeSetVal) * -1) / fixer)* 100);
+
+
+                while (timeRealVal >= (60 * HourMod))
+                {
+                    HourMod = HourMod + 1;
+                }
+
+                 while (timeRealVal <= (60 * HourMod))
+                    {
+                    HourMod = HourMod - 1;
+
+
+
+                }
+
+                FormatSeconds = timeRealVal - (HourMod * 60);
+
+
+
+                lblRealTime.Text = Convert.ToString("Minuites: " + HourMod + " Seconds: " + FormatSeconds);
+
+
+                lblPercent.Text = Convert.ToString((((timeRealVal - floatTimeSetVal) * -1) / fixer)*100);
 
 
 
